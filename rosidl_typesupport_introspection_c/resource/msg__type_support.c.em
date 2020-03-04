@@ -109,12 +109,12 @@ void @(function_prefix)__@(message.structure.namespaced_type.name)_init_function
   // TODO(karsten1987): initializers are not yet implemented for typesupport c
   // see https://github.com/ros2/ros2/issues/397
   (void) _init;
-  @('__'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name]))__init(message_memory);
+  @('__'.join(message.structure.namespaced_type.namespaced_name()))__init(message_memory);
 }
 
 void @(function_prefix)__@(message.structure.namespaced_type.name)_fini_function(void * message_memory)
 {
-  @('__'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name]))__fini(message_memory);
+  @('__'.join(message.structure.namespaced_type.namespaced_name()))__fini(message_memory);
 }
 
 @[for member in message.structure.members]@
@@ -217,7 +217,7 @@ for index, member in enumerate(message.structure.members):
     # bool is_upper_bound_
     print('    %s,  // is upper bound' % ('true' if isinstance(member.type, BoundedSequence) else 'false'))
     # unsigned long offset_
-    print('    offsetof(%s__%s, %s),  // bytes offset in struct' % ('__'.join([package_name] + list(interface_path.parents[0].parts)), message.structure.namespaced_type.name, member.name))
+    print('    offsetof(%s__%s, %s),  // bytes offset in struct' % ('__'.join(message.structure.namespaced_type.namespaces), message.structure.namespaced_type.name, member.name))
     # void * default_value_
     print('    NULL,  // default value')  # TODO default value to be set
 
@@ -243,7 +243,7 @@ static const rosidl_typesupport_introspection_c__MessageMembers @(function_prefi
   "@('__'.join([package_name] + list(interface_path.parents[0].parts)))",  // message namespace
   "@(message.structure.namespaced_type.name)",  // message name
   @(len(message.structure.members)),  // number of fields
-  sizeof(@('__'.join([package_name] + list(interface_path.parents[0].parts) + [message.structure.namespaced_type.name]))),
+  sizeof(@('__'.join(message.structure.namespaced_type.namespaced_name()))),
   @(function_prefix)__@(message.structure.namespaced_type.name)_message_member_array,  // message members
   @(function_prefix)__@(message.structure.namespaced_type.name)_init_function,  // function to initialize message memory (memory has to be allocated)
   @(function_prefix)__@(message.structure.namespaced_type.name)_fini_function  // function to terminate message instance (will not free memory)

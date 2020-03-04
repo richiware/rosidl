@@ -2,15 +2,15 @@
 @{
 TEMPLATE(
     'msg__type_support.h.em',
-    package_name=package_name, message=service.request_message,
-    include_directives=include_directives)
+    package_name=package_name, interface_path=interface_path,
+    message=service.request_message, include_directives=include_directives)
 }@
 
 @{
 TEMPLATE(
     'msg__type_support.h.em',
-    package_name=package_name, message=service.response_message,
-    include_directives=include_directives)
+    package_name=package_name, interface_path=interface_path,
+    message=service.response_message, include_directives=include_directives)
 }@
 
 @{header_file = 'rosidl_generator_c/service_type_support_struct.h'}@

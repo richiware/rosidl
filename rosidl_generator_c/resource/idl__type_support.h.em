@@ -42,8 +42,8 @@ from rosidl_parser.definition import Message
 @{
 TEMPLATE(
     'msg__type_support.h.em',
-    package_name=package_name, message=message,
-    include_directives=include_directives)
+    package_name=package_name, interface_path=interface_path,
+    message=message, include_directives=include_directives)
 }@
 
 @[end for]@
@@ -58,8 +58,8 @@ from rosidl_parser.definition import Service
 @{
 TEMPLATE(
     'srv__type_support.h.em',
-    package_name=package_name, service=service,
-    include_directives=include_directives)
+    package_name=package_name, interface_path=interface_path,
+    service=service, include_directives=include_directives)
 }@
 
 @[end for]@
@@ -74,8 +74,8 @@ from rosidl_parser.definition import Action
 @{
 TEMPLATE(
     'action__type_support.h.em',
-    package_name=package_name, action=action,
-    include_directives=include_directives)
+    package_name=package_name, interface_path=interace_path,
+    action=action, include_directives=include_directives)
 }@
 
 @[end for]@
